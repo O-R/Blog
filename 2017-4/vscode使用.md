@@ -1,0 +1,27 @@
+# VSCode 使用技巧
+
+## 参考链接
+
+[vscode 官方文档](https://code.visualstudio.com/docs)
+
+## 常用的扩展插件
+
+### `C#`
+
+1. C#
+1. C# Extensions
+1. NuGet Package Manager
+
+### `主题`
+
+1. vscode-icons
+
+### `MarkDown`
+
+1. markdownlint
+
+
+
+
+
+
