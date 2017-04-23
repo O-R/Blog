@@ -1,0 +1,122 @@
+<h1>基础语法</h1>
+<h2>标题</h2>
+<pre><code># This is an &lt;h1&gt; tag
+## This is an &lt;h2&gt; tag
+### This is an &lt;h3&gt; tag
+</code></pre>
+<h1>This is an <code>&lt;h1&gt;</code> tag</h1>
+<h2>This is an <code>&lt;h2&gt;</code> tag</h2>
+<h3>This is an <code>&lt;h3&gt;</code> tag</h3>
+<h2>加粗/斜体/删除线</h2>
+<h3>斜体</h3>
+<pre><code>*This text will be italic*
+_This text will be italic_
+</code></pre>
+<p><em>This text will be italic</em><br>
+<em>This text will be italic</em></p>
+<h3>加粗</h3>
+<pre><code>**This text will be blod**
+__This text will be blod__
+</code></pre>
+<p><strong>This text will be blod</strong><br>
+<strong>This text will be blod</strong></p>
+<h3>组合</h3>
+<p><em>You <strong>can</strong> &lt;del&gt;combine&lt;del&gt; <s>them</s></em></p>
+<h2>列表</h2>
+<h3>有序</h3>
+<pre><code>1. Item1
+1. Item2
+    1. Item2a --一个Tab
+    1. Item2b
+</code></pre>
+<ol>
+<li>Item1</li>
+<li>Item2
+<ol>
+<li>Item2a --一个Tab</li>
+<li>Item2b</li>
+</ol>
+</li>
+</ol>
+<h3>无序</h3>
+<ul>
+<li>Item1</li>
+<li>Item2
+<ul>
+<li>Item2a</li>
+<li>Item2b</li>
+</ul>
+</li>
+</ul>
+<h2>图片</h2>
+<pre><code>![CSDN Logo](/images/logo.png)
+Formate:![Alt Text](url)
+</code></pre>
+<p><img src="http://c.csdnimg.cn/public/favicon.ico" alt="CSDN Logo"></p>
+<h2>链接</h2>
+<pre><code>[GitHub](http://github.com) -automatic!
+Formate:[Text](url)
+</code></pre>
+<p><a href="http://github.com">GitHub</a> -automatic!</p>
+<h2>引用</h2>
+<pre><code>As Kanye West said:
+
+&gt; We're living the future so
+&gt; the present is our past.
+</code></pre>
+<p>As Kanye West said:</p>
+<blockquote>
+<p>We're living the future so<br>
+the present is our past.</p>
+</blockquote>
+<h2>行内代码</h2>
+<pre><code>I think you should use an `&lt;addr&gt;` element here instead.
+</code></pre>
+<p>I think you should use an <code>&lt;addr&gt;</code> element here instead.</p>
+<h2>语法高亮</h2>
+<pre><code class="language-javascript">function fancyAlert(arg) {
+  if(arg) {
+    $.facebox({div:'#foo'})
+  }
+}
+</code></pre>
+<h3>使用四个空格</h3>
+<pre><code>function fancyAlert(arg) {
+  if(arg) {
+    $.facebox({div:'#foo'})
+  }
+}
+</code></pre>
+<h2>任务列表</h2>
+<pre><code>- [x] @mentions, #refs, [links](), **formatting**, and &lt;del&gt;tags&lt;/del&gt; supported
+- [x] list syntax required (any unordered or ordered list supported)
+- [x] this is a complete item
+- [ ] this is an incomplete item
+</code></pre>
+<ul>
+<li>[x] @mentions, #refs, <a href="">links</a>, <strong>formatting</strong>, and &lt;del&gt;tags&lt;/del&gt; supported</li>
+<li>[x] list syntax required (any unordered or ordered list supported)</li>
+<li>[x] this is a complete item</li>
+<li>[ ] this is an incomplete item</li>
+</ul>
+<h2>表格</h2>
+<pre><code>列1|列b
+-|-
+adjfadofafoa|dfasdfjkladfjajkkfklas
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>列1</th>
+<th>列b</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>adjfadofafoa</td>
+<td>dfasdfjkladfjajkkfklas</td>
+</tr>
+</tbody>
+</table>
+<h1>参考链接</h1>
+<p>参考<a href="https://guides.github.com/features/mastering-markdown/#examples">Github MarkDown语法</a></p>
