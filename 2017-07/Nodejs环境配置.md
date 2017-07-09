@@ -2,7 +2,7 @@
 
 1. （手动安装）直接在Release页面下载，下载手动安装版本`nvm-noinstall.zip`：https://github.com/coreybutler/nvm-windows/releases
 1. 在要安装的文件夹下，右键-在此处打开命令行，在命令行中执行：git clone https://github.com/coreybutler/nvm-windows.git
-1. 以上二选一
+1. 以上二选一，以下介绍均基于第一种
 
 # 配置
 
