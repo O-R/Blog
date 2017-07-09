@@ -34,3 +34,5 @@ npm_mirror: https://npm.taobao.org/mirrors/npm/
 ## 安装`Nodejs`
 
 1. nvm install latest
+1. nvm use [version]
+1. 输入node -v ，显示版本即成功
