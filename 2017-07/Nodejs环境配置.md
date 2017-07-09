@@ -13,10 +13,10 @@
 1. `Path`：在这个系统环境变量后边加上`%NVM_HOME%;%NVM_SYMLINK%`,注意原`Path`变量要`;`结尾，没有便加上
 1. 把上面这些同时应用于用户变量，否则你将需要重启电脑
 1. 在安装目录下添加`settings.txt`，内容如下：
-    * root: `NVM_HOME`的内容
-    * path: `NVM_SYMLINK`的内容
-    * proxy: 默认设置为 "none"。如果需要配置，可以通过命令行
-    * arch: 32/64，操作系统是32位还是64位
+    * root: `NVM_HOME`的内容
+    * path: `NVM_SYMLINK`的内容
+    * proxy: 默认设置为 "none"。如果需要配置，可以通过命令行
+    * arch: 32/64，操作系统是32位还是64位
   
 ```
 root: C:\Users\Corey\AppData\Roaming\nvm
