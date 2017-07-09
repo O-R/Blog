@@ -7,10 +7,11 @@
 
 ## `nvmw`配置
 
-1. 更改环境变量，有两个是新增：`NVM_HOME`,`NVM_SYMLINK`，一个是修改：`Path`
+1. 更改系统环境变量，有两个是新增：`NVM_HOME`,`NVM_SYMLINK`，一个是修改：`Path`
 1. `NVM_HOME`：解压安装包的路径，如果是自动安装版本，默认是：`C:\Users\<username>\AppData\Roaming\nvm`
 1. `NVM_SYMLINK`：这个路径必须不存在，nvmw会自动生成，此路径用于辨认当前使用的是哪个版本的Nodejs
 1. `Path`：在这个系统环境变量后边加上`%NVM_HOME%;%NVM_SYMLINK%`,注意原`Path`变量要`;`结尾，没有便加上
+1. 把上面这些同时应用于用户变量，否则你将需要重启电脑
 1. 在安装目录下添加`settings.txt`，内容如下：
     * root: `NVM_HOME`的内容
     * path: `NVM_SYMLINK`的内容
@@ -25,3 +26,11 @@ proxy: none
 node_mirror: https://npm.taobao.org/mirrors/node/
 npm_mirror: https://npm.taobao.org/mirrors/npm/
 ```
+## `nvmw`安装成功测试
+
+1. 如果没有将系统环境变量配置应用于用户环境变量，需要重启电脑
+1. 在命令行输入`nvm`，回车，出现帮助信息，那么安装成功了
+
+## 安装`Nodejs`
+
+1. nvm install latest
