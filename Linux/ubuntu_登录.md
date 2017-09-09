@@ -8,7 +8,7 @@
 ssh-keygen -t rsa -b 2048
 ```
 
-### 查看密钥(位于`C:\Users\用户名\AppData\Local\lxss\home\or\.ssh`)
+### 查看密钥(位于`C:\Users\当前windows用户\AppData\Local\lxss\home\ssh用户\.ssh`)
 
 ```
 cat ~/.ssh/id_rsa.pub
