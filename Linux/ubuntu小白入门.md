@@ -1,4 +1,4 @@
-# 登录
+# 一、 登录
 
 ## 1. 生成SSH密钥
 
@@ -102,5 +102,48 @@ ssh fedora22
 
 执行 ssh fedora22 后，SSH 先从 Host fedora22 块中找到并加载所有设置，并从最后一个块 (Host *) 中加载所有剩余设置。
 
+## 2、远程桌面登录
+
+### 使用 `apt` 安装轻型 `xfce4` 桌面环境
+
+```
+sudo apt-get update
+sudo apt-get install xfce4
+```
+
+### 安装和配置远程桌面服务器
+
+安装桌面环境后，请配置远程桌面服务来侦听传入连接。 xrdp 是大多数 Linux 分发版中提供的开源远程桌面协议 (RDP) 服务器，可与 xfce 完美配合。 在 Ubuntu VM 上安装 xrdp，如下所示：
+
+```
+sudo apt-get install xrdp
+```
+
+告诉 xrdp 在启动会话时要使用的桌面环境。 配置 xrdp 以使用 xfce 作为桌面环境，如下所示：
+
+```
+echo xfce4-session >~/.xsession
+```
+
+重新启动 xrdp 服务使更改生效，如下所示：
+
+```
+sudo service xrdp restart
+```
+
+设置本地用户帐户密码
+
+如果在创建 VM 时已为用户帐户创建密码，请跳过此步骤。 如果仅使用 SSH 密钥身份验证，并且未设置本地帐户密码，请在使用 xrdp 之前指定密码以登录到 VM。 xrdp 无法接受使用 SSH 密钥进行身份验证。 以下示例为用户帐户 azureuser 指定密码：
+
+```
+sudo passwd azureuser
+```
+
+**备注 :指定密码不会将 SSHD 配置更新为允许密码登录（如果当前不允许）。**
+
+### 为远程桌面流量创建网络安全组规则
+
+若要允许远程桌面流量到达 Linux VM，需要创建网络安全组规则以允许端口 3389 上的 TCP 访问 VM。
+至此，就可以用windows远程桌面登录了
 
 
