@@ -1,0 +1,41 @@
+<h1>下载安装 <code>nvm-windows</code></h1>
+<ol>
+<li>（手动安装）直接在Release页面下载，下载手动安装版本<code>nvm-noinstall.zip</code>：https://github.com/coreybutler/nvm-windows/releases</li>
+<li>在要安装的文件夹下，右键-在此处打开命令行，在命令行中执行：git clone https://github.com/coreybutler/nvm-windows.git</li>
+<li>以上二选一，以下介绍均基于第一种</li>
+</ol>
+<h1>配置</h1>
+<h2><code>nvmw</code>配置</h2>
+<ol>
+<li>更改系统环境变量，有两个是新增：<code>NVM_HOME</code>,<code>NVM_SYMLINK</code>，一个是修改：<code>Path</code></li>
+<li><code>NVM_HOME</code>：解压安装包的路径，如果是自动安装版本，默认是：<code>C:\Users\&lt;username&gt;\AppData\Roaming\nvm</code></li>
+<li><code>NVM_SYMLINK</code>：这个路径必须不存在，nvmw会自动生成，此路径用于辨认当前使用的是哪个版本的Nodejs</li>
+<li><code>Path</code>：在这个系统环境变量后边加上<code>%NVM_HOME%;%NVM_SYMLINK%</code>,注意原<code>Path</code>变量要<code>;</code>结尾，没有便加上</li>
+<li>把上面这些同时应用于用户变量，否则你将需要重启电脑</li>
+<li>在安装目录下添加<code>settings.txt</code>，内容如下：
+<ul>
+<li>root: <code>NVM_HOME</code>的内容</li>
+<li>path: <code>NVM_SYMLINK</code>的内容</li>
+<li>proxy: 默认设置为 &quot;none&quot;。如果需要配置，可以通过命令行</li>
+<li>arch: 32/64，操作系统是32位还是64位</li>
+</ul>
+</li>
+</ol>
+<pre><code>root: C:\Users\Corey\AppData\Roaming\nvm
+path: C:\Program Files\nodejs
+arch: 64
+proxy: none
+node_mirror: https://npm.taobao.org/mirrors/node/
+npm_mirror: https://npm.taobao.org/mirrors/npm/
+</code></pre>
+<h2><code>nvmw</code>安装成功测试</h2>
+<ol>
+<li>如果没有将系统环境变量配置应用于用户环境变量，需要重启电脑</li>
+<li>在命令行输入<code>nvm</code>，回车，出现帮助信息，那么安装成功了</li>
+</ol>
+<h2>安装<code>Nodejs</code></h2>
+<ol>
+<li>nvm install latest</li>
+<li>nvm use [version]</li>
+<li>输入node -v ，显示版本即成功</li>
+</ol>
