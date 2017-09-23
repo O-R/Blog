@@ -1,0 +1,90 @@
+<h1>应用程序启动</h1>
+<h2><code>Startup</code> 类</h2>
+<ol>
+<li>
+<p>应用程序的入口</p>
+</li>
+<li>
+<p>默认在主程序集中搜索名为 Startup 的类（在任何命名空间下）</p>
+</li>
+<li>
+<p>使用 <code>Hosting:Application</code> 配置键,可以指定一个其它程序集用于检索</p>
+</li>
+<li>
+<p>不关心 <code>Startup</code> 类是不是定义为 public</p>
+</li>
+<li>
+<p>有多个 <code>Startup</code> 类，会基于命名空间选择其中一个（匹配项目的根命名空间优先，否则使用第一个按字母排列的命名空间中的类）</p>
+</li>
+</ol>
+<h2><code>Configure</code> 方法</h2>
+<ol>
+<li>
+<p>用于指定 ASP.NET 应用程序将如何响应每一个 HTTP 请求</p>
+</li>
+<li>
+<p>Configure 方法必须接受一个 IApplicationBuilder 参数</p>
+</li>
+<li>
+<p>每个 <code>Use</code> 扩展方法都会把一个 <code>中间件</code> 加入请求管道。比如 <code>UseMvc</code> 扩展方法会把 <code>路由中间件</code> 加进请求管道，并把 <code>MVC</code> 配置为默认的处理器。</p>
+</li>
+</ol>
+<pre><code class="language-C#">public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+{
+    loggerFactory.AddConsole(Configuration.GetSection(&quot;Logging&quot;));
+    loggerFactory.AddDebug();
+
+    if (env.IsDevelopment())
+    {
+        app.UseDeveloperExceptionPage();//手工高亮
+        app.UseDatabaseErrorPage();//手工高亮
+        app.UseBrowserLink();//手工高亮
+    }
+    else
+    {
+        app.UseExceptionHandler(&quot;/Home/Error&quot;);//手工高亮
+    }
+
+    app.UseStaticFiles();//手工高亮
+
+    app.UseIdentity();//手工高亮
+
+    // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
+
+    app.UseMvc(routes =&gt;//手工高亮
+    {
+        routes.MapRoute(
+            name: &quot;default&quot;,
+            template: &quot;{controller=Home}/{action=Index}/{id?}&quot;);
+    });
+}
+</code></pre>
+<h2><code>ConfigureServices</code> 方法</h2>
+<ol>
+<li>
+<p>你的 <code>Startup</code> 类能<strong>可选</strong>地包含一个 <code>ConfigureServices</code> 方法用来配置用于应用程序内的服务。</p>
+</li>
+<li>
+<p><code>ConfigureServices</code> 需要在 <code>Configure</code> 之前被调用</p>
+<ul>
+<li>因为像 ASP.NET MVC 中的某些功能，需要从 ConfigureServices 中请求某些服务，而这些服务需要在接入请求管道之前先被加入 ConfigureServices 中</li>
+</ul>
+</li>
+</ol>
+<pre><code class="language-C#">public void ConfigureServices(IServiceCollection services)
+{
+    // Add framework services.
+    services.AddDbContext&lt;ApplicationDbContext&gt;(options =&gt;//手工高亮
+        options.UseSqlServer(Configuration.GetConnectionString(&quot;DefaultConnection&quot;)));
+
+    services.AddIdentity&lt;ApplicationUser, IdentityRole&gt;()//手工高亮
+        .AddEntityFrameworkStores&lt;ApplicationDbContext&gt;()
+        .AddDefaultTokenProviders();
+
+    services.AddMvc();//手工高亮
+
+    // Add application services.
+    services.AddTransient&lt;IEmailSender, AuthMessageSender&gt;();
+    services.AddTransient&lt;ISmsSender, AuthMessageSender&gt;();
+}
+</code></pre>

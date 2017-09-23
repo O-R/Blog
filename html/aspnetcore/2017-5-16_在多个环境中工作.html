@@ -1,0 +1,46 @@
+<h1>在多环境中工作</h1>
+<h2>环境变量：<code>ASPNETCORE_ENVIRONMENT</code></h2>
+<p>（不区分大小写）取值为：</p>
+<ol>
+<li>
+<p>开发 <code>Development</code></p>
+</li>
+<li>
+<p>预演 <code>Staging</code></p>
+</li>
+<li>
+<p>生产 <code>Production</code></p>
+</li>
+</ol>
+<h2>在运行时确定环境</h2>
+<p>a. <code>env.IsEnvironment(&quot;environmentname&quot;)</code></p>
+<pre><code class="language-C#">public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+{
+    if (env.IsDevelopment())
+    {
+        app.UseDeveloperExceptionPage();
+        app.UseDatabaseErrorPage();
+        app.UseBrowserLink();
+    }
+    else
+    {
+        app.UseExceptionHandler(&quot;/Home/Error&quot;);
+    }
+    // ...
+</code></pre>
+<p>b. <code>tag helpers</code></p>
+<pre><code class="language-html">&lt;environment names=&quot;Development&quot;&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;~/lib/bootstrap/dist/css/bootstrap.css&quot; /&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;~/css/site.css&quot; /&gt;
+&lt;/environment&gt;
+&lt;environment names=&quot;Staging,Production&quot;&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css&quot;
+          asp-fallback-href=&quot;~/lib/bootstrap/dist/css/bootstrap.min.css&quot;
+          asp-fallback-test-class=&quot;sr-only&quot; asp-fallback-test-property=&quot;position&quot; asp-fallback-test-value=&quot;absolute&quot; /&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;~/css/site.min.css&quot; asp-append-version=&quot;true&quot; /&gt;
+&lt;/environment&gt;
+</code></pre>
+<h2>启动约定</h2>
+<p>ASP.NET Core 支持一种基于约定的方法来根据当前环境配置应用程序的启动。依据你的应用程序在哪一种环境，你也可以使用编程的方式控制应用程序的行为，允许你创建和管理你自己的约定。</p>
+<p>当 ASP.NET Core 应用程序启动， Startup 类用来引导应用程序，加载其配置设置等（学习更多关于 ASP.NET startup）。然而，如果一个类的命名存在 Startup<code>{EnvironmentName}</code> （例如 Startup<code>Development</code>），并且 Hosting:<code>Environment</code> 环境变量和它的名称相匹配，那么则使用那个 Startup 类。</p>
+<p>除了使用一个基于当前环境的完全独立的启动类，你也可以在 Startup 类中对应用程序如何配置做出调整。Configure() 和 ConfigureServices() 方法类似 Startup 类，以 Configure<code>[EnvironmentName]</code>() 和 Configure<code>[EnvironmentName]</code>Services() 的形式支持特定环境的版本。当设置为开发环境时，如果你定义一个 Configure<code>Development</code>() 方法，将调用这个方法而不是 Configure()。同样，在相同的环境里将调用 Configure<code>Development</code>Services() 而不是 ConfigureServices()。</p>
