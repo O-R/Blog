@@ -3,14 +3,14 @@
 ## `NAT`模式
 
 1. VM中打开 __编辑 -> 虚拟机网络编辑器__
-1. 获取到__可用IP范围、网关和子网掩码__
+1. 获取到 __可用IP范围、网关和子网掩码__
 1. 通过命令配置固定IP
 
 如下图：
 ![](https://raw.githubusercontent.com/O-R/Blog/master/Files/Img/natstaticip_1.png)
 ![](https://raw.githubusercontent.com/O-R/Blog/master/Files/Img/natstaticip_2.png)
 
-可以获取到__可用IP范围、网关和子网掩码__
+可以获取到 __可用IP范围、网关和子网掩码__
 
 - `可用IP范围`：192.168.175.128~192.168.175.254
 - `网关`：255.255.255.0
