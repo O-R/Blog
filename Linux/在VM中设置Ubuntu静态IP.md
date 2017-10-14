@@ -7,7 +7,8 @@
 1. 通过命令配置固定IP
 
 如下图：
-
+![](https://raw.githubusercontent.com/O-R/Blog/master/Files/Img/natstaticip_1.png)
+![](https://raw.githubusercontent.com/O-R/Blog/master/Files/Img/natstaticip_2.png)
 
 可以获取到__可用IP范围、网关和子网掩码__
 
@@ -35,3 +36,6 @@ dns-nameservers 192.168.175.2
 重启ubuntu网卡：`sudo /etc/init.d/networking restart`
 
 重启系统：`reboot`
+
+测试外网：`ping www.baidu.com`
+
