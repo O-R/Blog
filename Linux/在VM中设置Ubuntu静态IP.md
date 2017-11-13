@@ -16,15 +16,15 @@
 - `网关`：255.255.255.0
 - `子网掩码`：192.168.175.2
 
-修改配置：
+打开配置文件 `vim  /etc/network/interfaces`，修改配置：
 
 ```
 auto lo
 iface lo inet loopback
 
 # Assgin static IP by eric on 26-SEP-2012
-auto enss33
-iface enss33 inet static
+auto ens33
+iface ens33 inet static
 address 192.168.175.139 #change to your static IP
 netmask 255.255.255.0  #change to your netmask
 gateway 192.168.175.2    #change to your getway
