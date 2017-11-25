@@ -50,22 +50,37 @@ root   发件邮箱
 # 邮件队列查看
 
 
-列出/打印当前邮件队列
-## postqueue –p
+## 列出/打印当前邮件队列
+
+`postqueue –p`
  
-## mailq
-如果队列太长，可以使用tail管道读取。
-## mailq | tail
-清理队列
-## postqueue -f
-立即投递某domain.com域名的所有邮件
-## postqueue -s domain.com
-删除所有队列
-## postsuper -d ALL
-删除指定的消息
-## postsuper -d messageid
-重新排队邮件或者重新发送指定邮件
-## postfix -r msgid
-查找邮件版本
-## postconf -d mail_version
-mail_version =2.6.6
+`mailq`
+
+## 如果队列太长，可以使用tail管道读取。
+
+`mailq | tail`
+
+## 清理队列
+
+`postqueue -f`
+
+## 立即投递某domain.com域名的所有邮件
+
+`postqueue -s domain.com`
+
+## 删除所有队列
+
+`postsuper -d ALL`
+
+## 删除指定的消息
+
+`postsuper -d messageid`
+
+## 重新排队邮件或者重新发送指定邮件
+
+`postfix -r msgid`
+
+## 查找邮件版本
+
+`postconf -d mail_version`
+
