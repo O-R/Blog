@@ -19,17 +19,28 @@ sender_canonical_maps = hash:/etc/postfix/sender_canonical
  
 `vim /etc/postfix/sasl_passwd`
 （邮箱账号和密码文件，每行一个。 创建好后需要使用postmap命令使配置文件生效）
+
+```
 [smtp.163.com]:25   发件邮箱:邮箱密码
+```
+
+
 `postmap /etc/postfix/sasl_passwd`
  
 `vim /etc/postfix/sender_canonical`
 （linux用户和发件人对应关系，每行一个）
+
+```
 root   发件邮箱
+```
+
 `postmap /etc/postfix/sender_canonical`
  
 重启Postfix：
 `service postfix restart`
  
 尝试发送邮件：
+
 `echo "hello world"  |mail -s  test hung_z_h@qq.com`
+
 (可以用 mailq 命令查看发送队列，清空mailq队列 ： postsuper -d ALL  )
