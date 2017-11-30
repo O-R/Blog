@@ -1,9 +1,27 @@
-# apt
+# 常用命令
 
-# 查看所有用户 `cat /etc/passwd`
+## apt
 
-# 查看所有用户组 `cat /etc/group`
+## 用户/用户组
 
-# 查看所有服务端口 `cat /etc/services | less`
+1. 查看所有用户 `cat /etc/passwd`
+1. 查看所有用户组 `cat /etc/group`
+1. 添加用户 
+1. 将用户添加到 sudoers
 
-# 防火墙 `ufw`
+## 查看所有服务端口 `cat /etc/services | less`
+
+## 防火墙 `ufw`
+
+## 文件
+
+### 权限 `chmod`
+
+### 列举文件 `ls`
+
+### 移动/复制/剪切 `mv`
+
+### 删除 `rm`
+
+### 解压缩 `rar`
+
