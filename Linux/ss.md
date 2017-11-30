@@ -56,6 +56,9 @@ ssserver -c /etc/shadowsocks.json -d start
 ssserver -c /etc/shadowsocks.json -d stop  
 ```
 
-# [SS客户端各个版本下载地址](https://help.fyvps.com/index.php/archives/51/)
+# SS客户端下载地址
+
+1. [github地址](https://github.com/shadowsocks/shadowsocks-windows/releases)
+1. [其他下载地址](https://help.fyvps.com/index.php/archives/51/)
 
 # [谷歌插件 SwitchyOmega](https://switchyomega.com/)
