@@ -30,6 +30,3 @@
 
 ### 解压缩 `rar`
 
-1.  adfasafsdf
-    打发
-1.  dafddfasfd
