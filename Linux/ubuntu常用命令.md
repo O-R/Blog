@@ -7,8 +7,8 @@
 1. 查看所有用户 `cat /etc/passwd`
 1. 查看所有用户组 `cat /etc/group`
 1. 添加用户 `sudo adduser or`
-1. > 将用户添加到 sudoers  
- **sudo vim /etc/sudoers**  
+1.   将用户添加到 sudoers  
+     **sudo vim /etc/sudoers**  
      修改文件如下：  
      \# User privilege specification  
      root ALL=(ALL) ALL  
@@ -29,4 +29,3 @@
 ### 删除 `rm`
 
 ### 解压缩 `rar`
-
