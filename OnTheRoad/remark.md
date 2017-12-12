@@ -8,6 +8,7 @@
     
       - [ ] 使用.netcore开发WebAPI
       - [ ] 认证与授权：OAuth、JWT、OIDC（OpenID Connect）、identityserver-4
+      - [ ] Swagger
     
     * 参考项目或博客
     
@@ -16,6 +17,7 @@
       - [IdentityServer4](https://github.com/IdentityServer/IdentityServer4)
       - [IdentityServer4](https://github.com/IdentityServer/IdentityServer4)
       - [NanoFabric](https://github.com/geffzhang/NanoFabric)
+      - [swagger-ui](https://github.com/swagger-api/swagger-ui)
 
 1.  Web Service
 
