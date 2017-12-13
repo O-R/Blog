@@ -19,6 +19,13 @@
 <p>如果已创建 VM，则可使用以下命令将新的 SSH 公钥安装到 Linux VM：</p>
 <pre><code>ssh-copy-id -i ~/.ssh/id_rsa.pub ahmet@myserver
 </code></pre>
+<blockquote>
+<p>注意：遇到无法连接22端口，可能未安装<code>openssh-server</code></p>
+</blockquote>
+<p>安装命令：</p>
+<pre><code>sudo apt-get install openssh-server
+sudo /etc/init.d/ssh restart（重新启动ssh服务）
+</code></pre>
 <h3>创建并配置 SSH 配置文件</h3>
 <p>建议的最佳做法是，创建并配置 ~/.ssh/config 文件，以便加速登录和优化 SSH 客户端行为。
 以下示例显示了标准配置。</p>

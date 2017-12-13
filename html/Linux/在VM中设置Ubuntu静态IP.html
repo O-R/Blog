@@ -1,0 +1,33 @@
+<h1>在VM中设置Ubuntu静态IP</h1>
+<h2><code>NAT</code>模式</h2>
+<ol>
+<li>VM中打开 <strong>编辑 -&gt; 虚拟机网络编辑器</strong></li>
+<li>获取到 <strong>可用IP范围、网关和子网掩码</strong></li>
+<li>通过命令配置固定IP</li>
+</ol>
+<p>如下图：
+<img src="https://raw.githubusercontent.com/O-R/Blog/master/Files/Img/natstaticip_1.png" alt="">
+<img src="https://raw.githubusercontent.com/O-R/Blog/master/Files/Img/natstaticip_2.png" alt=""></p>
+<p>可以获取到 <strong>可用IP范围、网关和子网掩码</strong></p>
+<ul>
+<li><code>可用IP范围</code>：192.168.175.128~192.168.175.254</li>
+<li><code>网关</code>：255.255.255.0</li>
+<li><code>子网掩码</code>：192.168.175.2</li>
+</ul>
+<p>打开配置文件 <code>vim /etc/network/interfaces</code>，修改配置：</p>
+<pre><code>auto lo
+iface lo inet loopback
+
+# Assgin static IP by eric on 26-SEP-2012
+auto ens33
+iface ens33 inet static
+address 192.168.175.139 #change to your static IP
+netmask 255.255.255.0  #change to your netmask
+gateway 192.168.175.2    #change to your getway
+#We must specify dns-nameserver here
+#in order to get internet access from host
+dns-nameservers 192.168.175.2
+</code></pre>
+<p>重启ubuntu网卡：<code>sudo /etc/init.d/networking restart</code></p>
+<p>重启系统：<code>reboot</code></p>
+<p>测试外网：<code>ping www.baidu.com</code></p>

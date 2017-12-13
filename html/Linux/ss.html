@@ -1,0 +1,41 @@
+<h1>Ubuntu 14.04下安装和配置ShadowSocks服务器</h1>
+<h2>安装ShadowSocks服务器</h2>
+<p>在Ubuntu下安装ShadowSocks服务器端其实很简单，只需要键入下面几条命令就可以了：</p>
+<pre><code>sudo apt-get update  
+sudo apt-get install python-gevent python-pip  
+sudo pip install shadowsocks  
+apt-get install python-m2crypto  
+</code></pre>
+<h2>配置ShadowSocks服务器</h2>
+<p>ShadowSocks服务器的配置文件可以放到任何你想放的位置，起任何的名字。
+出于习惯，可以将其放在/etc目录下，名字为shadowsocks.json：</p>
+<pre><code>vim /etc/shadowsocks.json  
+</code></pre>
+<p>在编辑器里面修改文件内容为：</p>
+<pre><code>{  
+    &quot;server&quot;:&quot;serverip&quot;,  
+    &quot;server_port&quot;:8388,  
+    &quot;local_port&quot;:1080,  
+    &quot;password&quot;:&quot;Your Password&quot;,  
+    &quot;timeout&quot;:600,  
+    &quot;method&quot;:&quot;aes-256-cfb&quot;  
+}  
+</code></pre>
+<p>你可以更改“server_port”字段，修改ShadowSocks服务器的端口。
+还有“method”字段指定的是加密算法，ShadowSocks服务器支持多种加密算法（aes-256-cfb，aes-192-cfb，aes-128-cfb，rc4-md5，des-cfb等等），可以根据需要自己配置。</p>
+<h2>运行ShadowSocks服务器</h2>
+<p>注意ShadowSocks服务器要在root用户下运行，所以一开始请切换用户。
+然后只需要输入下面的命令就可以了：</p>
+<pre><code>ssserver -c /etc/shadowsocks.json -d start 
+</code></pre>
+<p>-c参数用来指定ShadowSocks服务器端配置文件的路径，只要设置成前一步修改的配置文件的路径名就好了。</p>
+<h2>停止ShadowSocks服务器</h2>
+<p>同样要在root用户下，执行下面的命令即可：</p>
+<pre><code>ssserver -c /etc/shadowsocks.json -d stop  
+</code></pre>
+<h1>SS客户端下载地址</h1>
+<ol>
+<li><a href="https://github.com/shadowsocks/shadowsocks-windows/releases">github地址</a></li>
+<li><a href="https://help.fyvps.com/index.php/archives/51/">其他下载地址</a></li>
+</ol>
+<h1><a href="https://switchyomega.com/">谷歌插件 SwitchyOmega</a></h1>
