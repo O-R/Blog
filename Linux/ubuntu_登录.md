@@ -40,6 +40,15 @@ ssh-add ~/.ssh/id_rsa
 ssh-copy-id -i ~/.ssh/id_rsa.pub ahmet@myserver
 ```
 
+> 注意：遇到无法连接22端口，可能未安装`openssh-server`
+
+安装命令：
+
+```
+sudo apt-get install openssh-server
+sudo /etc/init.d/ssh restart（重新启动ssh服务）
+```
+
 ### 创建并配置 SSH 配置文件
 
 建议的最佳做法是，创建并配置 ~/.ssh/config 文件，以便加速登录和优化 SSH 客户端行为。
