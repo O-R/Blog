@@ -1,0 +1,49 @@
+<h1>配置代发邮箱</h1>
+<h2><code>vim /etc/postfix/main.cf</code></h2>
+<p>（Postfix主要配置文件，再其末尾添加以下配置）</p>
+<pre><code>#指定默认的邮件发送服务器
+relayhost = [smtp.163.com]:25
+#激活sasl认证
+smtp_sasl_auth_enable = yes
+#指定sasl密码配置文件
+smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
+#非匿名登录
+smtp_sasl_security_options = noanonymous
+#指定认证类型 （提示：需要yum安装cyrus-sasl-*组件，否则发邮件时会报错：no mechanism available）
+smtp_sasl_type = cyrus
+#linux用户与发件人的对应关系配置文件
+sender_canonical_maps = hash:/etc/postfix/sender_canonical 
+</code></pre>
+<h2><code>vim /etc/postfix/sasl_passwd</code></h2>
+<p>（邮箱账号和密码文件，每行一个。 创建好后需要使用postmap命令使配置文件生效）</p>
+<pre><code>[smtp.163.com]:25   发件邮箱:邮箱密码
+</code></pre>
+<p><code>postmap /etc/postfix/sasl_passwd</code></p>
+<h2><code>vim /etc/postfix/sender_canonical</code></h2>
+<p>（linux用户和发件人对应关系，每行一个）</p>
+<pre><code>root   发件邮箱
+</code></pre>
+<p><code>postmap /etc/postfix/sender_canonical</code></p>
+<h2>重启Postfix：</h2>
+<p><code>service postfix restart</code></p>
+<h2>尝试发送邮件：</h2>
+<p><code>echo &quot;hello world&quot; |mail -s test hung_z_h@qq.com</code></p>
+<p>(可以用 mailq 命令查看发送队列，清空mailq队列 ： postsuper -d ALL  )</p>
+<h1>邮件队列查看</h1>
+<h2>列出/打印当前邮件队列</h2>
+<p><code>postqueue –p</code></p>
+<p><code>mailq</code></p>
+<h2>如果队列太长，可以使用tail管道读取。</h2>
+<p><code>mailq | tail</code></p>
+<h2>清理队列</h2>
+<p><code>postqueue -f</code></p>
+<h2>立即投递某domain.com域名的所有邮件</h2>
+<p><code>postqueue -s domain.com</code></p>
+<h2>删除所有队列</h2>
+<p><code>postsuper -d ALL</code></p>
+<h2>删除指定的消息</h2>
+<p><code>postsuper -d messageid</code></p>
+<h2>重新排队邮件或者重新发送指定邮件</h2>
+<p><code>postfix -r msgid</code></p>
+<h2>查找邮件版本</h2>
+<p><code>postconf -d mail_version</code></p>
