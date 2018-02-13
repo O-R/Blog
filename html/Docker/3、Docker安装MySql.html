@@ -1,0 +1,203 @@
+<h2>安装 <code>mysql</code> 镜像</h2>
+<ol>
+<li>
+<p>拉取mysql 镜像：</p>
+<blockquote>
+<pre><code>docker pull mysql/mysql-server
+</code></pre>
+</blockquote>
+</li>
+<li>
+<p>安装：</p>
+<blockquote>
+<pre><code>docker run -d -p 3306:3306 --name [mysql 容器名称] mysql/mysql-server
+</code></pre>
+</blockquote>
+</li>
+<li>
+<p>查看日志：</p>
+<blockquote>
+<pre><code>docker logs [mysql 容器名称]
+</code></pre>
+</blockquote>
+</li>
+</ol>
+<h2>mysql镜像</h2>
+<ol>
+<li>
+<p>进入mysql bash环境命令：</p>
+<blockquote>
+<pre><code>docker exec -it [mysql 容器名称] bash
+</code></pre>
+</blockquote>
+</li>
+<li>
+<p>mysql登录命令：</p>
+<blockquote>
+<pre><code>mysql -hIP -uUSENME -pPWD -PPORT DBNAME -e &quot;sql&quot;
+</code></pre>
+<pre><code>mysql -uroot -p
+</code></pre>
+<p>通过 <code>docker logs [mysql 容器名称]</code> 查看生成的root账户随机密码</p>
+</blockquote>
+</li>
+<li>
+<p>mysql 设置：</p>
+<blockquote>
+<ul>
+<li>使用mysql系统数据库<pre><code>use mysql
+</code></pre>
+</li>
+</ul>
+<ul>
+<li>
+<p>重置root账户密码</p>
+<pre><code>SET PASSWORD FOR 'root'@'localhost' = PASSWORD('pwd123456');
+</code></pre>
+</li>
+<li>
+<p>出现错误，数据库连接失败：</p>
+<p>Host '192.168.0.106' is not allowed to connect to this MySQL server</p>
+<p>远程连接失败是因为root用户host限制为localhost：</p>
+<pre><code>mysql&gt; select user,host from user;
++---------------+-----------+
+| user          | host      |
++---------------+-----------+
+| healthchecker | localhost |
+| mysql.session | localhost |
+| mysql.sys     | localhost |
+| root          | localhost |
++---------------+-----------+
+4 rows in set (0.00 sec)
+</code></pre>
+</li>
+<li>
+<p>创建新用户</p>
+<pre><code>mysql&gt; CREATE USER 'or'@'localhost' IDENTIFIED BY 'pwd123456';
+mysql&gt; GRANT ALL PRIVILEGES ON *.* TO 'or'@'localhost'
+    -&gt;     WITH GRANT OPTION;
+mysql&gt; CREATE USER 'or'@'%' IDENTIFIED BY 'pwd123456';
+mysql&gt; GRANT ALL PRIVILEGES ON *.* TO 'or'@'%'
+    -&gt;     WITH GRANT OPTION;
+</code></pre>
+<pre><code>mysql&gt; select user,host from user
+    -&gt; ;
++---------------+-----------+
+| user          | host      |
++---------------+-----------+
+| or            | %         |
+| healthchecker | localhost |
+| mysql.session | localhost |
+| mysql.sys     | localhost |
+| or            | localhost |
+| root          | localhost |
++---------------+-----------+
+6 rows in set (0.00 sec)
+</code></pre>
+</li>
+<li>
+<p>字符集：</p>
+<pre><code>mysql&gt; show variables like '%char%';
++--------------------------+----------------------------+
+| Variable_name            | Value                       |
++--------------------------+----------------------------+
+| character_set_client     | latin1                      |
+| character_set_connection | latin1                      |
+| character_set_database   | latin1                      |
+| character_set_filesystem | binary                      |
+| character_set_results    | latin1                      |
+| character_set_server     | latin1                      |
+| character_set_system     | utf8                        |
+| character_sets_dir       | /usr/share/mysql/charsets/ |
++--------------------------+----------------------------+
+8 rows in set (0.01 sec)
+</code></pre>
+</li>
+<li>
+<p>设置mysql默认字符集为utf8:</p>
+<p>修改MYSQL 默认字符集：</p>
+<pre><code>cd /etc
+vim my.cnf
+</code></pre>
+<p>添加到my.cnf</p>
+<pre><code>[mysqld]
+
+character-set-server=utf8
+
+[client]
+
+default-character-set=utf8
+
+[mysql]
+
+default-character-set=utf8
+</code></pre>
+<pre><code>mysql&gt; show variables like '%char%';
++--------------------------+----------------------------+
+| Variable_name            | Value                       |
++--------------------------+----------------------------+
+| character_set_client     | utf8                        |
+| character_set_connection | utf8                        |
+| character_set_database   | latin1                      |
+| character_set_filesystem | binary                      |
+| character_set_results    | utf8                        |
+| character_set_server     | latin1                      |
+| character_set_system     | utf8                        |
+| character_sets_dir       | /usr/share/mysql/charsets/ |
++--------------------------+----------------------------+
+8 rows in set (0.00 sec)
+</code></pre>
+</li>
+</ul>
+</blockquote>
+</li>
+<li>
+<p>环境变量</p>
+<blockquote>
+<ul>
+<li>
+<p><a href="https://dev.mysql.com/doc/refman/5.7/en/docker-mysql-more-topics.html">mysql 在Docker上配置官方文档</a></p>
+<p>eg :</p>
+<pre><code>sudo docker run -p 3305:3306 -d -e MYSQL_USER=&quot;or&quot; -e MYSQL_PASSWORD=&quot;pwd123456&quot; -e MYSQL_ROOT_PASSWORD=&quot;rootpwd&quot; --name mysql02 mysql/mysql-server --character-set-server=utf8 --collation-server=utf8_general_ci
+</code></pre>
+</li>
+<li>
+<p>挂载到宿主机（Host Volume）</p>
+<ul>
+<li>
+<p>建立host上的文件夹：</p>
+<pre><code>mkdir -p docker/mysql
+
+cd docker/mysql
+
+mkdir config data
+</code></pre>
+</li>
+<li>
+<p>在config 文件夹下添加文件一个my.cnf</p>
+<pre><code>vi my.cnf
+</code></pre>
+</li>
+<li>
+<p>添加以下配置，后期改动重启mysql镜像即可</p>
+<pre><code>[mysqld]
+user=mysql
+character-set-server=utf8 
+[client]
+default-character-set=utf8 
+[mysql]
+default-character-set=utf8
+</code></pre>
+</li>
+<li>
+<p>使用volumn挂载外部文件</p>
+<pre><code>sudo docker run -d -p 3304:3306 -e MYSQL_ROOT_PASSWORD=pwd123456 -e MYSQL_ROOT_HOST=% --name mysql03 -v=/docker/mysql/config/my.cnf:/etc/my.cnf -v=/docker/mysql/data:/var/lib/mysql    mysql/mysql-server
+</code></pre>
+<p><strong>删除镜像，同时注意删除data文件夹，否则会有密码缓存</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+</li>
+</ol>

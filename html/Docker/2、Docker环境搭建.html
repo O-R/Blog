@@ -1,0 +1,117 @@
+<h1>在<strong>Ubuntu16.04</strong>系统下安装Docker</h1>
+<h2>使用镜像仓库进行安装</h2>
+<h3>设置镜像仓库</h3>
+<ol>
+<li>
+<p>更新 apt 软件包索引：</p>
+<blockquote>
+<pre><code> $ sudo apt-get update
+</code></pre>
+</blockquote>
+</li>
+<li>
+<p>安装软件包，以允许 apt 通过 HTTPS 使用镜像仓库：</p>
+<blockquote>
+<pre><code>$ sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+</code></pre>
+</blockquote>
+</li>
+<li>
+<p>添加 Docker 的官方 GPG 密钥：</p>
+<blockquote>
+<pre><code>$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+</code></pre>
+</blockquote>
+</li>
+<li>
+<p>验证密钥指纹是否为 <code>9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88</code>。</p>
+<blockquote>
+<pre><code>$ sudo apt-key fingerprint 0EBFCD88
+
+pub   4096R/0EBFCD88 2017-02-22
+      Key fingerprint = 9DC8 5822 9FC7 DD38  854A  E2D8 8D81 803C 0EBF CD88
+uid                  Docker Release (CE deb) &lt;docker@docker.com&gt;
+sub   4096R/F273FCD8 2017-02-22
+</code></pre>
+</blockquote>
+</li>
+<li>
+<p>使用下列命令设置 <code>stable</code> 镜像仓库。您始终需要使用 <code>stable</code> 镜像仓库，即使您还需要通过 <code>edge</code> 或 <code>testing</code> 镜像仓库安装构建也是如此。如需添加 <code>edge</code> 或 <code>testing</code> 镜像仓库，请在以下命令中的词 <code>stable</code> 之后添加词 <code>edge</code> 和/或 <code>testing</code>。</p>
+<blockquote>
+<p>注：下面的 <code>lsb_release -cs</code> 子命令用于返回您的 Ubuntu 分发版，例如 xenial。</p>
+</blockquote>
+<blockquote>
+<p>有时，在 Linux Mint 等分发版中，您可能必须将 $(lsb_release -cs) 更改为您的父代 Ubuntu 分发版。例 如：如果您使用的是 Linux Mint Rafaela，您可以使用 trusty。</p>
+</blockquote>
+<blockquote>
+<p>amd64：</p>
+<pre><code>$ sudo add-apt-repository \
+   &quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable&quot;
+</code></pre>
+</blockquote>
+<blockquote>
+<p>注：从 Docker 17.06 开始，还会将 stable 版本推送到 edge 和 testing 镜像仓库。
+了解 stable 和 edge 渠道。</p>
+</blockquote>
+</li>
+</ol>
+<h3>安装 DOCKER CE</h3>
+<ol>
+<li>
+<p>更新 apt 软件包索引。</p>
+<blockquote>
+<pre><code> $ sudo apt-get update
+</code></pre>
+</blockquote>
+</li>
+<li>
+<p>安装最新版本的 Docker CE，或者转至下一步以安装特定版本。将替换任何现有的 Docker 安装版本。</p>
+<blockquote>
+<pre><code>$ sudo apt-get install docker-ce
+</code></pre>
+</blockquote>
+<blockquote>
+<p>警告： 如果您启用了多个 Docker 镜像仓库，进行安装 或者更新而不在 apt-get install 或 apt-get update 命令中指定版本将始终安装可用的最高版本， 这可能无法满足您的稳定性需求。</p>
+</blockquote>
+</li>
+<li>
+<p>在生产系统中，您应该安装特定版本的 Docker CE，而不是始终使用最新版本。此输出将被截断。列出可用版本。</p>
+<blockquote>
+<pre><code>$ apt-cache madison docker-ce
+docker-ce | 17.06.0~ce-0~ubuntu-xenial |  https://download.docker.com/linux/ubuntu xenial/stable amd64 Packages
+</code></pre>
+</blockquote>
+<blockquote>
+<p>此列表的内容取决于启用了哪些镜像仓库，并且将特定于 您的 Ubuntu 版本（在本示例中，由版本中的 xenial 后缀   表示）。选择一个特定版本进行安装。第二列为版本字符  串。第三列为镜像仓库名称，它表示软件包来自哪个镜像仓    库并按扩展其稳定性级别列出。如需安装特定版本，请将版  本字符串附加到软件包名称，并使用等号 (=) 分隔它们：</p>
+</blockquote>
+<blockquote>
+<pre><code>$ sudo apt-get install docker-ce=&lt;VERSION&gt;
+</code></pre>
+</blockquote>
+<p>Docker 守护进程将自动启动。</p>
+</li>
+<li>
+<p>验证是否正确安装了 Docker CE，方法是运行 hello-world 镜像。</p>
+<blockquote>
+<pre><code>$ sudo docker run hello-world
+</code></pre>
+</blockquote>
+<blockquote>
+<p>此命令将下载一个测试镜像并在容器中运行它。容器运行 时，它将输出一条参考消息并退出。</p>
+</blockquote>
+<blockquote>
+<p>Docker CE 已安装并且正在运行。您需要使用 sudo 运行 Docker 命令。继续执行 Linux 安装后步骤以允许非特权用户运行 Docker 命令，以及了解其他可选配置步骤。</p>
+</blockquote>
+</li>
+</ol>
+<h2>参考链接</h2>
+<ul>
+<li><a href="https://docs.docker-cn.com/engine/installation/linux/docker-ce/ubuntu">官方中文安装</a></li>
+<li><a href="https://docs.docker.com/install/linux/docker-ce/ubuntu/">官方英文安装</a></li>
+</ul>
