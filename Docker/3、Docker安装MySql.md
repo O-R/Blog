@@ -7,7 +7,7 @@
     > docker pull mysql/mysql-server
     > ```
 
-1. 安装：
+1.  安装：
 
     > ```
     > docker run -d -p 3306:3306 --name [mysql 容器名称] mysql/mysql-server
@@ -17,7 +17,15 @@
 
     > ```
     > docker logs [mysql 容器名称]
+    > docker logs [mysql 容器名称] 2>&1
+    > docker logs [mysql 容器名称] 2>&1 | grep GENERATED （查看随机密码）
     > ```
+
+1.  监视：
+
+    > ```
+    > docker inspect [mysql 容器名称]
+    > ``
 
 ## mysql镜像
 
@@ -209,3 +217,22 @@
     >         **删除镜像，同时注意删除data文件夹，否则会有密码缓存**
 
 
+## TODO
+
+1. mysql 日志  
+    my.cnf 里面添加配置即可
+    ```
+    [mysqld]
+    user=mysql
+    character-set-server=utf8
+    # log_bin=D:\mysql-5.7.15-winx64\log\mysql-bin.log
+    # log_error=D:\mysql-5.7.15-winx64\log\mysql.err
+    # long_query_time=1
+    # slow_query_log=ON
+    # slow_query_log_file=D:\mysql-5.7.15-winx64\log\mysql-slow.log
+    general_log=ON
+    general_log_file=/var/lib/mysql/mysql03.log
+    slow_query_log = on
+    slow-query-log-file=/var/lib/mysql/mysql03-slow.log
+
+    ```

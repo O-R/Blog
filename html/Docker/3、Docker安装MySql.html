@@ -18,6 +18,16 @@
 <p>查看日志：</p>
 <blockquote>
 <pre><code>docker logs [mysql 容器名称]
+docker logs [mysql 容器名称] 2&gt;&amp;1
+docker logs [mysql 容器名称] 2&gt;&amp;1 | grep GENERATED （查看随机密码）
+</code></pre>
+</blockquote>
+</li>
+<li>
+<p>监视：</p>
+<blockquote>
+<pre><code>docker inspect [mysql 容器名称]
+``
 </code></pre>
 </blockquote>
 </li>
