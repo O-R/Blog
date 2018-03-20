@@ -25,7 +25,7 @@
 
     > ```
     > docker inspect [mysql 容器名称]
-    > ``
+    > ```
 
 ## mysql镜像
 
