@@ -34,6 +34,8 @@
 
 ### 删除 `rm`
 
+1. sudo apt-get purge --auto-remove packagename
+
 ### 解压缩 `rar`
 
 ### 代理测试
