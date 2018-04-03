@@ -64,7 +64,7 @@ RABBITMQ_MNESIA_DIR  |  $RABBITMQ_MNESIA_BASE/$RABBITMQ_NODENAME
 RABBITMQ_LOG_BASE  |  ${install_prefix}/var/log/rabbitmq
 RABBITMQ_LOGS  |  $RABBITMQ_LOG_BASE/$RABBITMQ_NODENAME.log
 RABBITMQ_SASL_LOGS  |  $RABBITMQ_LOG_BASE/$RABBITMQ_NODENAME-sasl.log
-RABBITMQ_PLUGINS_DIR  |  /usr/lib/rabbitmq/plugins:$RABBITMQ_HOME/plugins <br> Note that /usr/lib/rabbitmq/plugins is used only when RabbitMQ is installed into the standard (default) location.
+RABBITMQ_PLUGINS_DIR  |  /usr/lib/rabbitmq/plugins:$RABBITMQ_HOME/plugins <br><br> Note that /usr/lib/rabbitmq/plugins is used only when RabbitMQ is installed into the standard (default) location.
 RABBITMQ_ENABLED_PLUGINS_FILE  |  ${install_prefix}/etc/rabbitmq/enabled_plugins
 RABBITMQ_PID_FILE  |  $RABBITMQ_MNESIA_DIR.pid
 
