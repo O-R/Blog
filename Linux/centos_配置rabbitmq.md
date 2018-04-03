@@ -56,7 +56,7 @@ NODENAME=hare
 - [默认位置](http://www.rabbitmq.com/relocate.html)
 
 Name  |  Location
--  |  -
+---  |  ---
 RABBITMQ_BASE  |  (Not used - Windows only)
 RABBITMQ_CONFIG_FILE  |  ${install_prefix}/etc/rabbitmq/rabbitmq
 RABBITMQ_MNESIA_BASE  |  ${install_prefix}/var/lib/rabbitmq/mnesia
